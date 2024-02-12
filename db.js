@@ -2,9 +2,9 @@ import mysql from 'mysql'
 
 const pool =  mysql.createPool({
   host:"localhost",
-  username:"root",
+  user:"root",
   password:"",
   database:"hotel-database",
-  port:"3307"
+  port:"3306"
 })
 export default  pool

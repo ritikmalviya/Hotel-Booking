@@ -1,15 +1,15 @@
-import express from 'express'
-const app = express()
-const port = 3000
-import pool from "./db.js"
+import express from "express";
+const app = express();
+const port = 3000;
+import pool from "./db.js";
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-var reconnect = null
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+var reconnect = null;
 
-const connectServer =()=>{
-  pool.getConnection((err )=>{
+const connectServer = () => {
+  pool.getConnection((err, conn) => {
     if (err) {
       console.error(
         "Error creating connection pool:",
@@ -19,17 +19,18 @@ const connectServer =()=>{
       if (!reconnect) {
         reconnect = setInterval(() => {
           connectServer();
-        }, 3307);
+        }, 3306);
       }
       return;
     }
     clearInterval(reconnect);
     console.log("Connection pool created successfully.");
     conn.release();
-  })
-}
+  });
+};
 
+connectServer()
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
