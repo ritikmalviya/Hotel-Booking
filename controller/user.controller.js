@@ -1,13 +1,16 @@
 import pool from "../db.js";
 
+
 const Register = (req, res) => {
 
-    const Data = {
+    const Data = [{
         username: req.body.username,
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
-    }
+    }]
+
+    console.log(Data);
 
     pool.getConnection((err, con) => {
         if (err) {
@@ -16,7 +19,7 @@ const Register = (req, res) => {
         }
 
         const selectQuery = 'SELECT * FROM users WHERE email=?';
-        con.query(selectQuery, Data.email, (error, result) => {
+        con.query(selectQuery, [Data.email], (error, result) => {
             if (error) {
                 console.log(`Error in selecting user: ${error}`);
                 con.release();

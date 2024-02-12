@@ -5,6 +5,9 @@ const port = 3000;
 import pool from "./db.js";
 import routes from "./routes/user.route.js";
 
+app.use(express.json())
+app.use(bodyParser.json());
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -34,10 +37,6 @@ const connectServer = () => {
 connectServer()
 
 app.use(routes)
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(bodyParser.urlencoded({ extended: true }));
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
