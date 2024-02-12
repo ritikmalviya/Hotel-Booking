@@ -1,10 +1,10 @@
 import mysql from 'mysql'
 
-const pool =  mysql.createPool({
-  host:"localhost",
-  user:"root",
-  password:"",
-  database:"hotel-database",
-  port:"3306"
+const pool = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "hotel-database",
+  port: "4306"
 })
-export default  pool
+export default pool
